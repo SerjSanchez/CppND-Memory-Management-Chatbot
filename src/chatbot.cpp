@@ -42,11 +42,50 @@ ChatBot::~ChatBot()
     }
 }
 
-//// STUDENT CODE
-////
+ // Copy constructor
+ChatBot::ChatBot(const ChatBot &other)
+{
+    std::cout << "ChatBot Copy Constructor" << std::endl;
 
-////
-//// EOF STUDENT CODE
+    _chatLogic = other._chatLogic;
+    _currentNode = other._currentNode;
+    _rootNode = other._rootNode;
+    _image = new wxBitmap(*other._image);
+}
+
+// Move constructor
+ChatBot::ChatBot(ChatBot &&other) 
+{
+    std::cout << "ChatBot Move Constructor" << std::endl;
+
+    _chatLogic = other._chatLogic;
+    _currentNode = other._currentNode;
+    _rootNode = other._rootNode;
+    _image = other._image;
+
+    other._chatLogic = nullptr;
+    other._currentNode = nullptr;
+    other._rootNode = nullptr;
+    other._image = nullptr;
+}
+
+// Assignment operator
+ChatBot &ChatBot::operator=(ChatBot &other)
+{
+    std::cout << "ChatBot Assignment Operator" << std::endl;
+
+    return *this = ChatBot(other);
+
+}
+
+// Move assignment operator
+ChatBot &ChatBot::operator=(ChatBot &&other) 
+{
+    std::cout << "ChatBot Move Assignment Operator" << std::endl;
+
+    return *this = ChatBot(other);
+
+}
 
 void ChatBot::ReceiveMessageFromUser(std::string message)
 {
